@@ -1,0 +1,2 @@
+model_checkpoint_path: "wechat.ckpt"
+all_model_checkpoint_paths: "wechat.ckpt"
