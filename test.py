@@ -9,3 +9,7 @@ for seq in sequences:
     sequence_padded += [seq_]
     sequence_length += [min(len(seq), max_length)]
 print(sequence_padded, sequence_length)
+stringss='300✖️2        1660➕10 '
+pattern='✖️'
+import re
+print(re.sub(pattern,'*',stringss))
