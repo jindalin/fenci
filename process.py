@@ -12,7 +12,7 @@ trainpath=os.getcwd()
 
 def _trim_content(string):
     #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-\_])", "", string)
+    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-\_\.])", "", string)
     #print(sub_str)
     return sub_str
 
@@ -136,7 +136,6 @@ def _file_to_ids(filename,word_to_id,max_length=50):
     for i in range(len(contents)):
         data_id.append([word_to_id[x] for x in contents[i] if x in word_to_id])
 
-
         label_id.append(cat_to_id[x] for x in labels[i])
 
     def pad(sequences):
@@ -152,19 +151,19 @@ def _file_to_ids(filename,word_to_id,max_length=50):
     x_pad,x_sequence=pad(data_id)
     y_pad,_=pad(label_id)
 
-    return x_pad,y_pad,x_sequence
+    return x_pad,y_pad,x_sequence,contents
 
 
 
 def  process_file(data_path=trainpath,seq_length=30):
     """一次性返回所有的数据"""
     words,word_to_id=_read_vocab(os.path.join(data_path,'vocab.txt'))
-    x_train,y_train,sequence_train=_file_to_ids(os.path.join(data_path,'train.xls'),word_to_id,seq_length)
-    x_test,y_test,sequence_test=_file_to_ids(os.path.join(data_path,
+    x_train,y_train,sequence_train,_=_file_to_ids(os.path.join(data_path,'train.xls'),word_to_id,seq_length)
+    x_test,y_test,sequence_test,_=_file_to_ids(os.path.join(data_path,
         'val.xls'), word_to_id, seq_length)
-    x_val, y_val,sequence_val = _file_to_ids(os.path.join(data_path,
+    x_val, y_val,sequence_val,content_val = _file_to_ids(os.path.join(data_path,
         'val.xls'), word_to_id, seq_length)
-    return x_train, y_train, x_test, y_test, x_val, y_val,words,sequence_train,sequence_test,sequence_val
+    return x_train, y_train, x_test, y_test, x_val, y_val,words,sequence_train,sequence_test,sequence_val,content_val
 
 
 # x_train,y_train,_,_,_,_,_= process_file()

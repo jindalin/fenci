@@ -19,7 +19,7 @@ def run_epoch(cnn=False):
     start_time = time.time()
     if not os.path.exists(trainpath+'/vocab.txt'):
         build_vocab(trainpath+'/train.xlsx')
-    x_train, y_train, x_test, y_test, x_val, y_val, words,sequence_train,sequence_test,sequence_val = process_file()
+    x_train, y_train, x_test, y_test, x_val, y_val, words,sequence_train,sequence_test,sequence_val,content_val = process_file()
 
     #print(x_train, y_train)
     print('Using RNN model...')
@@ -54,21 +54,23 @@ def run_epoch(cnn=False):
             model.sequence_lengths:sequence_train_batch
         }
         return feed_dict, len(x_batch)
-    def evaluate(x0_, y0_,sequence_val_):
+    def evaluate(x0_, y0_,sequence_val_,content_val):
         """
         模型评估
         一次运行所有的数据会OOM，所以需要分批和汇总
         """
         #print('begin evaluate:',list(zip(y_, Number_)))
-        batch_eval =batch_iter2(list(zip(x0_, y0_,sequence_val_)), 64, 1)
+        batch_eval =batch_iter2(list(zip(x0_, y0_,sequence_val_,content_val)), 64, 1)
         predict_all=[]
         sequence_all=[]
         y_all=[]
+        content_all=[]
         for i,batch in enumerate(batch_eval,1):
 
             unzip = list(zip(*batch))
             y_val=unzip[1]
             sequence = unzip[2]
+            content=unzip[3]
             feed_dict, cur_batch_len = feed_data(batch)
             feed_dict[model.keep_prob] = 1.0
 
@@ -79,7 +81,7 @@ def run_epoch(cnn=False):
             sequence_all.extend(sequence)
             #print(predict_.shape)
             y_all.extend(y_val)
-
+            content_all.extend(content)
         for j in range(len(predict_all)):
             predict_all[j]=predict_all[j][:sequence_all[j]]
 
@@ -87,7 +89,7 @@ def run_epoch(cnn=False):
             y_all[j]=y_all[j][:sequence_all[j]]
         #print('predict:',predict_all)
         #print('y_all:',y_all)
-        return loss,predict_all,sequence,y_all#,y_all#,total_loss / cnt, total_acc / cnt
+        return loss,predict_all,sequence,y_all,content_all#,y_all#,total_loss / cnt, total_acc / cnt
     # 训练与验证
 
 
@@ -96,7 +98,7 @@ def run_epoch(cnn=False):
     start_time = time.time()
     print_per_batch = config.print_per_batch
     for k, batch in enumerate(batch_train):
-        #print(i)
+
         feed_dict, _ = feed_data(batch)
 
         feed_dict[model.keep_prob] = config.dropout_keep_prob
@@ -104,15 +106,21 @@ def run_epoch(cnn=False):
         if k % print_per_batch == print_per_batch - 1:  # 每200次输出在训练集和验证集上的性能
             #print('before eval:', list(zip(list(y_val), Number_val)))
 
-            loss,predict,sequence,gt= evaluate(x_val, y_val,sequence_val)
+            loss,predict,sequence,gt,contents= evaluate(x_val, y_val,sequence_val,content_val)
             acc=0
             noacc=0
+
             for i in range(len(gt)):
                 for j in range(len(gt[i])):
                     if predict[i][j]==gt[i][j]:
                         acc+=1
                     else:
-                        noacc+=1
+                      noacc+=1                 
+                # if list(predict[i])==list(gt[i]):
+                 #    acc+=1
+                # else:
+                 #    noacc+=1
+
             print("epoch:",k,"accuracy:",acc/(acc+noacc))
 
 
