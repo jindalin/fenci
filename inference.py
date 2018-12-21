@@ -76,22 +76,40 @@ def run_epoch():
             y_lab += categories[y_val[i][j]]
         predict_categories.append(pred)
         y_labels.append(y_lab)
-    print(list(zip(predict_categories, content_val, y_labels)))
+    #print(list(zip(predict_categories, content_val, y_labels)))
 
 
-    def substitue(sentence):
-        sentence=re.sub('S',' S ',sentence)
-        sentence=re.sub('E','E ',sentence)
-        sentence=re.sub('B',' B',sentence)
-        return sentence
+#以下可以很快划分BESBE，但是对原始字符串没用
+   #  def substitue(sentence):
+   #      sentence=re.sub('S',' S ',sentence)
+   #      sentence=re.sub('E','E ',sentence)
+   #      sentence=re.sub('B',' B',sentence)
+   #      return sentence
+   #
+   #  predict_f=[substitue(sentence) for sentence in predict_categories]
+    # print(predict_f)
+    a=time.time()
+    new_strings=[]
+    for i in range(len(predict_categories)):
+        new_string=''
+        for j in range(len(predict_categories[i])):
+            if predict_categories[i][j]=='S':
+                new_string+=' '
+                new_string += content_val[i][j]
+                new_string += ' '
+            elif predict_categories[i][j]=='B':
+                new_string += ' '
+                new_string += content_val[i][j]
+            elif predict_categories[i][j]=='E':
+                new_string += content_val[i][j]
+                new_string += ' '
+            else:
+                new_string += content_val[i][j]
+        new_strings.append(new_string)
 
-    predict_f=[substitue(sentence) for sentence in predict_categories]
-    print(predict_f)
+    print(new_strings)
 
-
-
-
-
+    print(time.time()-a)
     for i in range(len(predict)):
         for j in range(len(predict[i])):
             if y_val[i][j]==predict[i][j]:
