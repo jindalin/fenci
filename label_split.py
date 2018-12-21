@@ -4,9 +4,9 @@ import xlrd,xlwt
 
 def trim_content(string):
     #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~【（）】()])", "", string)
+    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~【（）】()✘✖➕＋＋])", "", string)
     sub_str = re.sub("[✖✘]", "*", sub_str)
-    sub_str = re.sub("[➕＋]", "+", sub_str)
+    sub_str = re.sub("[➕＋＋]", "+", sub_str)
     sub_str = re.sub("_x1f4e6_️", ' ', sub_str)
     sub_str = re.sub("[【（）】()]", " ", sub_str)
 
@@ -14,7 +14,7 @@ def trim_content(string):
 
 def trim_content2(string):
     #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-\.\/\~])", "", string)
+    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-./~✘✖➕＋])", "", string)
     sub_str = re.sub("[✖✘]", "*", sub_str)
     sub_str = re.sub("[➕＋]", "+", sub_str)
     sub_str = re.sub("_x1f4e6_️", '', sub_str)
@@ -87,7 +87,7 @@ def labelsstring(string):
 
 
 if __name__=='__main__':
-    filename='from_mimo_all.xls'
+    filename='Icheck_from_mimo_all.xls'
     pairs=readfile(filename)
     writexls(pairs)
 # string='一年期 贵阳农 50 *11    4120!!'
