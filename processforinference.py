@@ -12,7 +12,7 @@ trainpath=os.getcwd()
 
 def _trim_content(string):
     #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~])", "", string)
+    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-\.\/\~])", "", string)
     sub_str = re.sub("[✖✘]", "*", sub_str)
     sub_str = re.sub("[➕＋]", "+", sub_str)
     sub_str = re.sub("_x1f4e6_️", '', sub_str)
@@ -173,43 +173,3 @@ def  process_file(data_path=trainpath,seq_length=30):
 # x_train,y_train,_,_,_,_,_= process_file()
 # print(x_train,y_train)
 
-def batch_iter(data,batch_size=64,num_epochs=5):
-    """生成批次数据"""
-    data=np.array(data)
-
-    data_size=len(data)#877
-    #print('datasize:',data_size)
-    num_batchs_per_epchs=int((data_size-1)/batch_size)+1 #14
-    #print('numsize:',num_batchs_per_epchs)
-    for epoch in range(num_epochs):
-        indices=np.random.permutation(np.arange(data_size))
-        shufflfed_data=data[indices]
-        for batch_num  in range(num_batchs_per_epchs):
-            start_index=batch_num*batch_size
-            end_index=min((batch_num + 1) * batch_size, data_size)
-            #print('yield:',len(shufflfed_data[start_index:end_index]))
-            yield shufflfed_data[start_index:end_index]
-
-def batch_iter2(data,batch_size=64,num_epochs=5):
-    """生成批次数据"""
-    data=np.array(data)
-
-    data_size=len(data)#877
-    #print('datasize2:',data_size)
-    num_batchs_per_epchs=int((data_size-1)/batch_size)+1 #14
-    #print('numbatch2:',num_batchs_per_epchs)
-    for epoch in range(num_epochs):
-        indices=np.random.permutation(np.arange(data_size))
-        shufflfed_data=data[indices]
-        for batch_num  in range(num_batchs_per_epchs):
-            start_index=batch_num*batch_size
-            end_index=min((batch_num + 1) * batch_size, data_size)
-            #print('yield:',len(shufflfed_data[start_index:end_index]))
-            yield shufflfed_data[start_index:end_index]
-
-
-
-    #print(origin_val)
-    #print(x_train.shape, y_train.shape)
-    #print(x_test.shape, y_test.shape)
-    #print(x_val.shape, y_val.shape)

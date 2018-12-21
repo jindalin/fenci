@@ -4,11 +4,12 @@ import xlrd,xlwt
 
 def trim_content(string):
     #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-\ \.\/\~])", "", string)
+    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~【（）】()])", "", string)
     sub_str = re.sub("[✖✘]", "*", sub_str)
     sub_str = re.sub("[➕＋]", "+", sub_str)
-    sub_str = re.sub("_x1f4e6_️", '', sub_str)
-    #print(sub_str)
+    sub_str = re.sub("_x1f4e6_️", ' ', sub_str)
+    sub_str = re.sub("[【（）】()]", " ", sub_str)
+
     return sub_str
 
 def trim_content2(string):
@@ -26,10 +27,11 @@ def readfile(filename):
     sheet_name = workbook.sheet_names()
     sheet = workbook.sheet_by_name(sheet_name[0])
     n = sheet.nrows
-    print(n)
+
     pairs=[]
+    print('readfile:')
     for row in range(n):  # 305
-        print(len(sheet.row_values(row)))
+        print(row)
         _,content0, _,_ = sheet.row_values(row)
 
         content = trim_content(content0)
@@ -37,6 +39,8 @@ def readfile(filename):
         label=labelsstring(content)
         a=[content2,label]
         pairs.append(a)
+        if row in [33,34,35]:
+            print(content0,content,content2)
 
     return pairs
         # Number.append(number)
