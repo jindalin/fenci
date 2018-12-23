@@ -4,7 +4,7 @@
 from rnn import TextRNN
 
 from  config import TRNNConfig
-from  processforinference  import process_file,writexls
+from  baoliukongge_process  import process_file,writexls
 import time
 import tensorflow as tf
 import os,re
@@ -13,15 +13,15 @@ import numpy as np
 
 trainpath=os.getcwd()
 
-categories={0:"PAD",1:"B",2:"E",3:"M",4:"S"}
+categories={0:"P",1:"B",2:"E",3:"M",4:"S"}
 def run_epoch():
     # 载入数据
     print('Loading data...')
 
     a=time.time()
-    x_val,words,sequence_val,content_val = process_file()
+    x_vals,words,sequence_vals,content_val = process_file()
+    print(list(zip(x_vals,sequence_vals,content_val)))
 
-    print(list(zip(x_val,content_val)))
     print('Using RNN model...')
     config = TRNNConfig()
     config.vocab_size = len(words)
@@ -63,19 +63,22 @@ def run_epoch():
         return predict_all#,y_all#,total_loss / cnt, total_acc / cnt
     # 训练与验证
     print('Training and evaluating...')
-    predict= evaluate(x_val, sequence_val)
+    predict_categories_all=[]
+    for x_val,sequence_val in zip(x_vals,sequence_vals):
+        predict= evaluate(x_val, sequence_val)
+        #print(x_val,sequence_val,predict)
+        predict_categories = []
+        for i in range(len(predict)):
+            pred = ''
+            for j in range(len(list(predict[i]))):
+                pred += categories[predict[i][j]]
+            predict_categories.append(pred)
 
-    predict_categories = []
+        predict_categories_all.append(predict_categories)
 
-    for i in range(len(predict)):
-        pred = ''
-
-        for j in range(len(list(predict[i]))):
-            pred += categories[predict[i][j]]
-
-        predict_categories.append(pred)
-
-    #print(list(zip(predict_categories, content_val, y_labels)))
+    #print(predict_categories_all)
+    predict_categories2=[''.join(listson) for listson in predict_categories_all]
+    #print(predict_categories2)
 
 
 #以下可以很快划分BESBE，但是对原始字符串没用
@@ -89,17 +92,18 @@ def run_epoch():
     # print(predict_f)
     print(time.time()-a)
     new_strings=[]
-    for i in range(len(predict_categories)):
+    for i in range(len(predict_categories2)):
         new_string=''
-        for j in range(len(predict_categories[i])):
-            if predict_categories[i][j]=='S':
+        print(predict_categories2[i],content_val[i])
+        for j in range(len(predict_categories2[i])):
+            if predict_categories2[i][j]=='S':
                 new_string+=' '
                 new_string += content_val[i][j]
                 new_string += ' '
-            elif predict_categories[i][j]=='B':
+            elif predict_categories2[i][j]=='B':
                 new_string += ' '
                 new_string += content_val[i][j]
-            elif predict_categories[i][j]=='E':
+            elif predict_categories2[i][j]=='E':
                 new_string += content_val[i][j]
                 new_string += ' '
             else:
@@ -108,6 +112,7 @@ def run_epoch():
 
     print(new_strings)
     writexls(str(4), new_strings)
+    print(time.time()-a)
     session.close()
 if __name__ == '__main__':
     run_epoch()

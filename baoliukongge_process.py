@@ -12,17 +12,20 @@ trainpath=os.getcwd()
 
 def _trim_content(string):
     #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a\+\*\-\.\/\~✘✖➕＋＋])", "", string)
+    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~【（）】()✘✖➕＋＋ ])", "", string)
     sub_str = re.sub("[✖✘]", "*", sub_str)
-    sub_str = re.sub("[➕＋]", "+", sub_str)
-    sub_str = re.sub("_x1f4e6_️", '', sub_str)
+    sub_str = re.sub("[➕＋＋]", "+", sub_str)
+    sub_str = re.sub("_x1f4e6_️", ' ', sub_str)
+    sub_str = re.sub("[【（）】()]", " ", sub_str)
+    sub_str =re.sub(" +"," ",sub_str)
+    sub_str=sub_str.strip()
     #print(sub_str)
     return sub_str
 
 def _read_file(filename):
     """读取文件数据"""
     counters=[]
-    origin_content=[]
+    content_splits=[]
 
     workbook = xlrd.open_workbook(filename)
     sheet_name = workbook.sheet_names()
@@ -32,12 +35,17 @@ def _read_file(filename):
     for row in range(n):#305
 
         content0=sheet.row_values(row)[0]
+
         content = _trim_content(content0)
-        origin_content.append(content0)
-        counters.append(content)
 
-    return  counters,origin_content
+        content_split = content.split()
 
+        content_splits.append(content_split)
+        content2=re.sub(" ","",content)
+        counters.append(content2)
+
+    return  counters,content_splits
+#_read_file('source/check_predict_4.xls')
 
 def set_style(name, height, bold=False):
     style = xlwt.XFStyle()  # 初始化样式
@@ -66,14 +74,14 @@ def writexls(string,row):
 
 def  _read_vocab(filename):
     """读取词汇列别"""
-    print(filename)
+
     words=list(map(lambda line:line.strip(),open(filename,'r',encoding='utf-8').readlines()))
     word_to_id=dict(zip(words,range(len(words))))
     return words,word_to_id
 
 def _read_category():
     """读取分类目录，固定0"""
-    categories=["PAD","B","E","M","S"]
+    categories=["P","B","E","M","S"]
     cat_to_id=dict(zip(categories,range(len(categories))))
     #print(cat_to_id)
     return categories,cat_to_id
@@ -86,25 +94,33 @@ def _file_to_ids(filename,word_to_id,max_length=50):
     """将文件转换为id表示"""
     pad_tok=0
     _,cat_to_id=_read_category()
-    contents,origin=_read_file(filename)
-    #print(contents,labels)
+    contents,content_splits=_read_file(filename)
+    #print(content_splits)
     data_id=[]
-    for i in range(len(contents)):
-        data_id.append([word_to_id[x] for x in contents[i] if x in word_to_id])
+    for i in range(len(content_splits)):
+        data_id_row=[]
+        for j in range(len(content_splits[i])):
+            data_id_row.append([word_to_id[x] for x in content_splits[i][j] if x in word_to_id])
+        data_id.append(data_id_row)
 
-    #print(data_id)
+
     def pad(sequences):
-        sequence_padded=[]
-        sequence_length=[]
+        sequence_padded_all = []
+        sequence_length_all = []
         for seq in sequences:
-            seq = list(seq)
-            seq_ = seq[:max_length] + [pad_tok] * max(max_length - len(seq), 0)
-            sequence_padded += [seq_]
-            sequence_length += [min(len(seq), max_length)]
-        return sequence_padded, sequence_length
+            sequence_padded = []
+            sequence_length = []
+            for seqinside in seq:
+                seqinside = list(seqinside)
+                seqinside_ = seqinside[:max_length] + [pad_tok] * max(max_length - len(seqinside), 0)
+                sequence_padded += [seqinside_]
+                sequence_length += [min(len(seqinside), max_length)]
+            sequence_padded_all.append(sequence_padded)
+            sequence_length_all.append(sequence_length)
+        return sequence_padded_all, sequence_length_all
 
     x_pad,x_sequence=pad(data_id)
-    #print(x_pad)
+
 
     return x_pad,x_sequence,contents
 
@@ -115,6 +131,7 @@ def  process_file(data_path=trainpath,seq_length=30):
     words,word_to_id=_read_vocab(os.path.join(data_path,'vocab.txt'))
     x_val, sequence_val,content_val = _file_to_ids(os.path.join(data_path,
         'source/check_predict_4.xls'), word_to_id, seq_length)
+
     return x_val,words,sequence_val,content_val
 
 
