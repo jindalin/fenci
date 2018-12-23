@@ -7,58 +7,24 @@ import os
 import xlrd,xlwt
 import re
 
-
 trainpath=os.getcwd()
-
-def _trim_content(string):
-    #print(string)
-    sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~])", "", string)
-    sub_str = re.sub("[✖✘]", "*", sub_str)
-    sub_str = re.sub("[➕＋]", "+", sub_str)
-    sub_str = re.sub("_x1f4e6_️", '', sub_str)
-
-    #print(sub_str)
-    return sub_str
 
 def _read_file(filename):
     """读取文件数据"""
     counters=[]
     labels=[]
-    Number=[]
-    name=filename.split('.')[-1]
-    origin_content=[]
-    #print(name)
-    if name=='txt':
-        print('here')
-        with open(filename,'r',encoding='utf-8') as f:
+    workbook = xlrd.open_workbook(filename)
+    sheet_name = workbook.sheet_names()
+    sheet=workbook.sheet_by_name(sheet_name[0])
+    n=sheet.nrows
 
-            for line in f.readlines():
-
-                try:
-
-                    content0,label=line.strip().split('\t')
-                    content=_trim_content(content0)
-                    origin_content.append(content0)
-                    counters.append(list(content))
-                    labels.append(label)
-                except Exception as e:
-                    pass
-    elif name=='xlsx' or name=='xls':
-        workbook = xlrd.open_workbook(filename)
-        sheet_name = workbook.sheet_names()
-        sheet=workbook.sheet_by_name(sheet_name[0])
-        n=sheet.nrows
-
-        for row in range(n):#305
-
-            content0,label=sheet.row_values(row)
-            content = _trim_content(content0)
-            origin_content.append(content0)
-            counters.append(content)
-            labels.append(label)
+    for row in range(n):#305
+        content0,label=sheet.row_values(row)
+        counters.append(content0)
+        labels.append(label)
             #Number.append(number)
     #print(list(zip(labels,Number)))
-    return  counters,labels,origin_content
+    return  counters,labels
 
 
 def set_style(name, height, bold=False):
@@ -96,7 +62,7 @@ def writexls(string,row):
 
 def  build_vocab(filename,vocab_size=5000):
     print(filename)
-    data,_,_=_read_file(filename)
+    data,_=_read_file(filename)
 
     all_data=[]
     for content in data:
@@ -133,7 +99,7 @@ def _file_to_ids(filename,word_to_id,max_length=50):
     """将文件转换为id表示"""
     pad_tok=0
     _,cat_to_id=_read_category()
-    contents,labels,origin=_read_file(filename)
+    contents,labels=_read_file(filename)
     #print(contents,labels)
     data_id=[]
     label_id=[]

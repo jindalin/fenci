@@ -19,9 +19,9 @@ def run_epoch():
     print('Loading data...')
 
 
-    x_train, y_train, x_test, y_test, x_val, y_val, words,sequence_train,sequence_test,sequence_val,content_val = process_file()
+    x_val,words,sequence_val,content_val = process_file()
 
-    #print(x_train, y_train)
+    print(list(zip(x_val,content_val)))
     print('Using RNN model...')
     config = TRNNConfig()
     config.vocab_size = len(words)
@@ -64,18 +64,17 @@ def run_epoch():
     # 训练与验证
     print('Training and evaluating...')
     predict= evaluate(x_val, sequence_val)
-    acc=0
-    noacc=0
+
     predict_categories = []
-    y_labels = []
+
     for i in range(len(predict)):
         pred = ''
-        y_lab = ''
+
         for j in range(len(list(predict[i]))):
             pred += categories[predict[i][j]]
-            y_lab += categories[y_val[i][j]]
+
         predict_categories.append(pred)
-        y_labels.append(y_lab)
+
     #print(list(zip(predict_categories, content_val, y_labels)))
 
 
@@ -88,7 +87,7 @@ def run_epoch():
    #
    #  predict_f=[substitue(sentence) for sentence in predict_categories]
     # print(predict_f)
-    a=time.time()
+
     new_strings=[]
     for i in range(len(predict_categories)):
         new_string=''
@@ -108,28 +107,7 @@ def run_epoch():
         new_strings.append(new_string)
 
     print(new_strings)
-
-    print(time.time()-a)
-    for i in range(len(predict)):
-        for j in range(len(predict[i])):
-            if y_val[i][j]==predict[i][j]:
-                acc+=1
-            else:
-                noacc+=1
-    print('predict acc:',acc/(acc+noacc))
-
-
-    ###########存储结果。
-    # writexls(str(i),list(zip(Number_val2,origin2,predict_val,groundtruth_val2)))
-
-
-
-
-    # # 最后在测试集上进行评估
-    # print('Evaluating on test set...')
-    # loss_test, acc_test,predict_test,groundtruth_test,Number_test = evaluate(x_test, y_test,Number_test)
-    # msg = 'Test Loss: {0:>6.2}, Test Acc: {1:>7.2%}'
-    # print(msg.format(loss_test, acc_test))
+    writexls(str(4), new_strings)
     session.close()
 if __name__ == '__main__':
     run_epoch()

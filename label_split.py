@@ -4,6 +4,7 @@ import xlrd,xlwt
 
 def trim_content(string):
     #print(string)
+
     sub_str = re.sub("([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a+*\- ./~【（）】()✘✖➕＋＋])", "", string)
     sub_str = re.sub("[✖✘]", "*", sub_str)
     sub_str = re.sub("[➕＋＋]", "+", sub_str)
@@ -31,16 +32,15 @@ def readfile(filename):
     pairs=[]
     print('readfile:')
     for row in range(n):  # 305
-        print(row)
-        _,content0, _,_ = sheet.row_values(row)
+
+        content0,_ = sheet.row_values(row)
 
         content = trim_content(content0)
         content2= trim_content2(content0)
         label=labelsstring(content)
         a=[content2,label]
         pairs.append(a)
-        if row in [33,34,35]:
-            print(content0,content,content2)
+
 
     return pairs
         # Number.append(number)
@@ -87,7 +87,7 @@ def labelsstring(string):
 
 
 if __name__=='__main__':
-    filename='Icheck_from_mimo_all.xls'
+    filename='fenci_all.xls'
     pairs=readfile(filename)
     writexls(pairs)
 # string='一年期 贵阳农 50 *11    4120!!'

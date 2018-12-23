@@ -16,49 +16,27 @@ def _trim_content(string):
     sub_str = re.sub("[✖✘]", "*", sub_str)
     sub_str = re.sub("[➕＋]", "+", sub_str)
     sub_str = re.sub("_x1f4e6_️", '', sub_str)
-
     #print(sub_str)
     return sub_str
 
 def _read_file(filename):
     """读取文件数据"""
     counters=[]
-    labels=[]
-    Number=[]
-    name=filename.split('.')[-1]
     origin_content=[]
-    #print(name)
-    if name=='txt':
-        print('here')
-        with open(filename,'r',encoding='utf-8') as f:
 
-            for line in f.readlines():
+    workbook = xlrd.open_workbook(filename)
+    sheet_name = workbook.sheet_names()
+    sheet=workbook.sheet_by_name(sheet_name[0])
+    n=sheet.nrows
 
-                try:
+    for row in range(n):#305
 
-                    content0,label=line.strip().split('\t')
-                    content=_trim_content(content0)
-                    origin_content.append(content0)
-                    counters.append(list(content))
-                    labels.append(label)
-                except Exception as e:
-                    pass
-    elif name=='xlsx' or name=='xls':
-        workbook = xlrd.open_workbook(filename)
-        sheet_name = workbook.sheet_names()
-        sheet=workbook.sheet_by_name(sheet_name[0])
-        n=sheet.nrows
+        content0=sheet.row_values(row)[0]
+        content = _trim_content(content0)
+        origin_content.append(content0)
+        counters.append(content)
 
-        for row in range(n):#305
-
-            content0,label=sheet.row_values(row)
-            content = _trim_content(content0)
-            origin_content.append(content0)
-            counters.append(content)
-            labels.append(label)
-            #Number.append(number)
-    #print(list(zip(labels,Number)))
-    return  counters,labels,origin_content
+    return  counters,origin_content
 
 
 def set_style(name, height, bold=False):
@@ -75,41 +53,16 @@ def set_style(name, height, bold=False):
 
 
 def writexls(string,row):
-    name='predict_{}.xls'.format(string)
+    name='predict/predict_{}.xls'.format(string)
     workbook = xlwt.Workbook(encoding='utf-8')
     # 创建sheet
     data_sheet = workbook.add_sheet('predict')
 
     # 生成第一行和第二行
     for n in range(len(row)):
-        for i in range(len(row[n])):
-            if i==0:
-
-                data_sheet.write(n, i, str(row[n][i]))
-            else:
-                data_sheet.write(n, i, int(row[n][i]))
-
-
+        data_sheet.write(n, 0, str(row[n]))
     # 保存文件
     workbook.save(name)
-
-
-def  build_vocab(filename,vocab_size=5000):
-    print(filename)
-    data,_,_=_read_file(filename)
-
-    all_data=[]
-    for content in data:
-        all_data.extend(content)
-    counter=Counter(all_data)
-    count_pairs=counter.most_common(vocab_size-1)
-    #print(count_pairs)
-    words,_=list(zip(*count_pairs))
-    # 添加一个 <PAD> 来将所有文本pad为同一长度
-    words = ['<PAD>'] + list(words)
-    print(len(words),words)
-    with open(trainpath+'/vocab.txt', 'w', encoding='utf-8') as f:
-        f.write('\n'.join(words))
 
 def  _read_vocab(filename):
     """读取词汇列别"""
@@ -133,14 +86,12 @@ def _file_to_ids(filename,word_to_id,max_length=50):
     """将文件转换为id表示"""
     pad_tok=0
     _,cat_to_id=_read_category()
-    contents,labels,origin=_read_file(filename)
+    contents,origin=_read_file(filename)
     #print(contents,labels)
     data_id=[]
-    label_id=[]
     for i in range(len(contents)):
         data_id.append([word_to_id[x] for x in contents[i] if x in word_to_id])
 
-        label_id.append(cat_to_id[x] for x in labels[i])
 
     def pad(sequences):
         sequence_padded=[]
@@ -153,21 +104,18 @@ def _file_to_ids(filename,word_to_id,max_length=50):
         return sequence_padded, sequence_length
 
     x_pad,x_sequence=pad(data_id)
-    y_pad,_=pad(label_id)
 
-    return x_pad,y_pad,x_sequence,contents
+
+    return x_pad,x_sequence,contents
 
 
 
 def  process_file(data_path=trainpath,seq_length=30):
     """一次性返回所有的数据"""
     words,word_to_id=_read_vocab(os.path.join(data_path,'vocab.txt'))
-    x_train,y_train,sequence_train,_=_file_to_ids(os.path.join(data_path,'train.xls'),word_to_id,seq_length)
-    x_test,y_test,sequence_test,_=_file_to_ids(os.path.join(data_path,
-        'val.xls'), word_to_id, seq_length)
-    x_val, y_val,sequence_val,content_val = _file_to_ids(os.path.join(data_path,
-        'val.xls'), word_to_id, seq_length)
-    return x_train, y_train, x_test, y_test, x_val, y_val,words,sequence_train,sequence_test,sequence_val,content_val
+    x_val, sequence_val,content_val = _file_to_ids(os.path.join(data_path,
+        'source/check_predict_4.xls'), word_to_id, seq_length)
+    return x_val,words,sequence_val,content_val
 
 
 # x_train,y_train,_,_,_,_,_= process_file()

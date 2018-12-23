@@ -17,7 +17,7 @@ def run_epoch(cnn=False):
     # 载入数据
     print('Loading data...')
     start_time = time.time()
-    build_vocab(trainpath+'/train.xls')
+    #build_vocab(trainpath+'/train.xls')
     x_train, y_train, x_test, y_test, x_val, y_val, words,sequence_train,sequence_test,sequence_val,content_val = process_file()
 
     #print(x_train, y_train)
