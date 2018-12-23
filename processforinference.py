@@ -16,6 +16,8 @@ def _trim_content(string):
     sub_str = re.sub("[✖✘]", "*", sub_str)
     sub_str = re.sub("[➕＋]", "+", sub_str)
     sub_str = re.sub("_x1f4e6_️", '', sub_str)
+    phone_pattern = re.compile(r'1\d{10}')
+    sub_str=re.sub(phone_pattern,'',sub_str)
     #print(sub_str)
     return sub_str
 
@@ -73,7 +75,7 @@ def  _read_vocab(filename):
 
 def _read_category():
     """读取分类目录，固定0"""
-    categories=["PAD","B","E","M","S"]
+    categories=["P","B","E","M","S"]
     cat_to_id=dict(zip(categories,range(len(categories))))
     #print(cat_to_id)
     return categories,cat_to_id
@@ -114,7 +116,7 @@ def  process_file(data_path=trainpath,seq_length=30):
     """一次性返回所有的数据"""
     words,word_to_id=_read_vocab(os.path.join(data_path,'vocab.txt'))
     x_val, sequence_val,content_val = _file_to_ids(os.path.join(data_path,
-        'source/check_predict_4.xls'), word_to_id, seq_length)
+        'source/check_predict_41.xls'), word_to_id, seq_length)
     return x_val,words,sequence_val,content_val
 
 

@@ -13,7 +13,7 @@ import numpy as np
 
 trainpath=os.getcwd()
 
-categories={0:"PAD",1:"B",2:"E",3:"M",4:"S"}
+categories={0:"P",1:"B",2:"E",3:"M",4:"S"}
 def run_epoch():
     # 载入数据
     print('Loading data...')
@@ -74,7 +74,7 @@ def run_epoch():
             pred += categories[predict[i][j]]
 
         predict_categories.append(pred)
-
+    print(predict_categories)
     #print(list(zip(predict_categories, content_val, y_labels)))
 
 
@@ -107,7 +107,7 @@ def run_epoch():
         new_strings.append(new_string)
 
     print(new_strings)
-    writexls(str(4), new_strings)
+    writexls(str(41), new_strings)
     session.close()
 if __name__ == '__main__':
     run_epoch()
