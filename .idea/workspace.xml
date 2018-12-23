@@ -3,16 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2a2f1ed2-5236-425e-885e-a991e5d5712e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/baoliukongke_inference.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ckpt/wechat.ckpt.data-00000-of-00001" afterPath="$PROJECT_DIR$/ckpt/wechat.ckpt.data-00000-of-00001" />
+      <change beforePath="$PROJECT_DIR$/ckpt/wechat.ckpt.index" afterPath="$PROJECT_DIR$/ckpt/wechat.ckpt.index" />
+      <change beforePath="$PROJECT_DIR$/ckpt/wechat.ckpt.meta" afterPath="$PROJECT_DIR$/ckpt/wechat.ckpt.meta" />
       <change beforePath="$PROJECT_DIR$/fenci_all.xls" afterPath="$PROJECT_DIR$/fenci_all.xls" />
-      <change beforePath="$PROJECT_DIR$/from_mimo_all.xls" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/inference.py" afterPath="$PROJECT_DIR$/inference.py" />
-      <change beforePath="$PROJECT_DIR$/predict/predict_4.xls" afterPath="$PROJECT_DIR$/predict/predict_4.xls" />
-      <change beforePath="$PROJECT_DIR$/predict/predict_4_keepspace.xls" afterPath="$PROJECT_DIR$/predict/predict_4_keepspace.xls" />
       <change beforePath="$PROJECT_DIR$/processforinference.py" afterPath="$PROJECT_DIR$/processforinference.py" />
-      <change beforePath="$PROJECT_DIR$/source/check_predict_4.xls" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/source/check_predict_41.xls" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/train.xls" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/val.xls" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/train.xls" afterPath="$PROJECT_DIR$/train.xls" />
+      <change beforePath="$PROJECT_DIR$/train_backup.xls" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/val.xls" afterPath="$PROJECT_DIR$/val.xls" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,10 +24,10 @@
     <SUITE FILE_PATH="coverage/fenci$baoliukongge_process.coverage" NAME="baoliukongge_process Coverage Results" MODIFIED="1545539147824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/fenci$process.coverage" NAME="process Coverage Results" MODIFIED="1545201344616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/fenci$baoliukongke_inference.coverage" NAME="baoliukongke_inference Coverage Results" MODIFIED="1545539596151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/fenci$inference.coverage" NAME="inference Coverage Results" MODIFIED="1545551417945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/fenci$label_split.coverage" NAME="label_split Coverage Results" MODIFIED="1545558407475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/fenci$inference.coverage" NAME="inference Coverage Results" MODIFIED="1545562876788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/fenci$label_split.coverage" NAME="label_split Coverage Results" MODIFIED="1545566300135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/fenci$processforinference.coverage" NAME="processforinference Coverage Results" MODIFIED="1545535099629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/fenci$fenci.coverage" NAME="fenci Coverage Results" MODIFIED="1545531704255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/fenci$fenci.coverage" NAME="fenci Coverage Results" MODIFIED="1545566425011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/fenci$boaliukongge_process.coverage" NAME="boaliukongge_process Coverage Results" MODIFIED="1545537876505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/fenci$test.coverage" NAME="test Coverage Results" MODIFIED="1545293625321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -37,7 +36,7 @@
       <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="120">
               <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
               <folding />
             </state>
@@ -57,20 +56,8 @@
       <file leaf-file-name="inference.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="76" column="28" lean-forward="false" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
-              <folding>
-                <element signature="e#43#66#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="baoliukongke_inference.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baoliukongke_inference.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-996">
-              <caret line="68" column="9" lean-forward="false" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+            <state relative-caret-position="104">
+              <caret line="109" column="19" lean-forward="false" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
               <folding>
                 <element signature="e#43#66#0" expanded="true" />
               </folding>
@@ -81,8 +68,8 @@
       <file leaf-file-name="label_split.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/label_split.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1848">
-              <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+            <state relative-caret-position="0">
+              <caret line="82" column="1" lean-forward="false" selection-start-line="82" selection-start-column="1" selection-end-line="82" selection-end-column="1" />
               <folding>
                 <element signature="e#14#23#0" expanded="true" />
               </folding>
@@ -93,8 +80,8 @@
       <file leaf-file-name="processforinference.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/processforinference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="118" column="32" lean-forward="false" selection-start-line="118" selection-start-column="32" selection-end-line="118" selection-end-column="32" />
+            <state relative-caret-position="221">
+              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -104,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/process.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="27">
-              <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+              <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -177,9 +164,9 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/baoliukongge_process.py" />
         <option value="$PROJECT_DIR$/baoliukongke_inference.py" />
-        <option value="$PROJECT_DIR$/processforinference.py" />
         <option value="$PROJECT_DIR$/inference.py" />
         <option value="$PROJECT_DIR$/process.py" />
+        <option value="$PROJECT_DIR$/processforinference.py" />
       </list>
     </option>
   </component>
@@ -189,9 +176,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="43" />
-    <option name="y" value="71" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="39" />
+    <option name="y" value="31" />
     <option name="width" value="1440" />
     <option name="height" value="781" />
   </component>
@@ -244,7 +231,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.label_split">
+  <component name="RunManager" selected="Python.fenci">
     <configuration name="baoliukongge_process" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -283,7 +270,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="boaliukongge_process" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="fenci" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -296,7 +283,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="fenci" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/boaliukongge_process.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fenci.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -342,18 +329,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.inference" />
-      <item index="1" class="java.lang.String" itemvalue="Python.boaliukongge_process" />
-      <item index="2" class="java.lang.String" itemvalue="Python.baoliukongke_inference" />
-      <item index="3" class="java.lang.String" itemvalue="Python.baoliukongge_process" />
-      <item index="4" class="java.lang.String" itemvalue="Python.label_split" />
+      <item index="1" class="java.lang.String" itemvalue="Python.baoliukongke_inference" />
+      <item index="2" class="java.lang.String" itemvalue="Python.baoliukongge_process" />
+      <item index="3" class="java.lang.String" itemvalue="Python.label_split" />
+      <item index="4" class="java.lang.String" itemvalue="Python.fenci" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.label_split" />
-        <item index="1" class="java.lang.String" itemvalue="Python.inference" />
-        <item index="2" class="java.lang.String" itemvalue="Python.baoliukongke_inference" />
-        <item index="3" class="java.lang.String" itemvalue="Python.baoliukongge_process" />
-        <item index="4" class="java.lang.String" itemvalue="Python.boaliukongge_process" />
+        <item index="0" class="java.lang.String" itemvalue="Python.fenci" />
+        <item index="1" class="java.lang.String" itemvalue="Python.label_split" />
+        <item index="2" class="java.lang.String" itemvalue="Python.inference" />
+        <item index="3" class="java.lang.String" itemvalue="Python.baoliukongke_inference" />
+        <item index="4" class="java.lang.String" itemvalue="Python.baoliukongge_process" />
       </list>
     </recent_temporary>
   </component>
@@ -374,8 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="43" y="71" width="1440" height="781" extended-state="0" />
-    <editor active="true" />
+    <frame x="39" y="31" width="1440" height="781" extended-state="1" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -751,14 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/boaliukongge_process.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
@@ -795,9 +773,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-996">
           <caret line="68" column="9" lean-forward="false" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="e#43#66#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -817,21 +793,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processforinference.py">
+    <entry file="file://$PROJECT_DIR$/process.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="118" column="32" lean-forward="false" selection-start-line="118" selection-start-column="32" selection-end-line="118" selection-end-column="32" />
+        <state relative-caret-position="27">
+          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="76" column="28" lean-forward="false" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
-          <folding>
-            <element signature="e#43#66#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -845,18 +811,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/process.py">
+    <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+        <state relative-caret-position="120">
+          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="109" column="19" lean-forward="false" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+          <folding>
+            <element signature="e#43#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processforinference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/label_split.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1848">
-          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="82" column="1" lean-forward="false" selection-start-line="82" selection-start-column="1" selection-end-line="82" selection-end-column="1" />
           <folding>
             <element signature="e#14#23#0" expanded="true" />
           </folding>

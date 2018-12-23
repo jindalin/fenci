@@ -116,7 +116,7 @@ def  process_file(data_path=trainpath,seq_length=30):
     """一次性返回所有的数据"""
     words,word_to_id=_read_vocab(os.path.join(data_path,'vocab.txt'))
     x_val, sequence_val,content_val = _file_to_ids(os.path.join(data_path,
-        'source/check_predict_41.xls'), word_to_id, seq_length)
+        'source/source_4.xls'), word_to_id, seq_length)
     return x_val,words,sequence_val,content_val
 
 
